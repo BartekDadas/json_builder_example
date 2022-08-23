@@ -1,0 +1,34 @@
+{"args" : {
+  "appBar": {
+    "type": "app_bar",
+    "args": {
+      "title": {
+        "type": "text",
+        "args": {
+          "text": "AnimatedTheme"
+        }
+      }
+    }
+  },
+  "bottomNavigationBar": {
+    "type": "bottom_navigation_bar",
+    "args": {
+      "items": [
+        {
+          "bottomNavigationBar" : {
+            "label" : "Icon1",
+            "icon": {
+              "type": "icon",
+              "args": {
+                "icon": {
+                  "codePoint": 57704,
+                  "fontFamily": "MaterialIcons"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}, "type" : "scaffold"}
