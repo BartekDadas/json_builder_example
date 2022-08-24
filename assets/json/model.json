@@ -15,8 +15,22 @@
     "args": {
       "items": [
         {
-          "bottomNavigationBar" : {
-            "label" : "Icon1",
+          "bottomNavigationBarItem": {
+            "label": "Icon1",
+            "icon": {
+              "type": "icon",
+              "args": {
+                "icon": {
+                  "codePoint": 57704,
+                  "fontFamily": "MaterialIcons"
+                }
+              }
+            }
+          }
+        },
+        {
+          "bottomNavigationBarItem" : {
+            "label" : "Icon2",
             "icon": {
               "type": "icon",
               "args": {
