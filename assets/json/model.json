@@ -10,7 +10,7 @@
       }
     }
   },
-  "bottomNavigationBar": {
+  "bottomNavigationBarItem": {
     "type": "bottom_navigation_bar",
     "args": {
       "items": [
