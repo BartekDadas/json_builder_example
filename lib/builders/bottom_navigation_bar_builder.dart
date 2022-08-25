@@ -17,7 +17,7 @@ class JsonBottomNavigationBarBuilder extends JsonWidgetBuilder {
   final bool? enableFeedback;
   final Color? fixedColor;
   final double iconSize;
-  final List<JsonBottomNavigationBarItemBuilder> items;
+  final List items;
   final BottomNavigationBarLandscapeLayout? landscapeLayout;
   final MouseCursor? mouseCursor;
   final ValueChanged<int>? onTap;
@@ -83,13 +83,7 @@ class JsonBottomNavigationBarBuilder extends JsonWidgetBuilder {
 
     if(map != null) {
       result = JsonBottomNavigationBarBuilder(
-        items: JsonClass.fromDynamicList(
-          map['items'],
-            (map) => JsonBottomNavigationBarItemBuilder.fromDynamic(
-              map['bottomNavigationBarItem'],
-              registry : registry,
-            )!,
-        )!,
+        items: map['items'],
         backgroundColor: ThemeDecoder.decodeColor(
           map['backgroundColor'],
           validate: false
@@ -103,7 +97,7 @@ class JsonBottomNavigationBarBuilder extends JsonWidgetBuilder {
         ),
         iconSize: JsonClass.parseDouble(map['iconSize'], 16.0)!,
         landscapeLayout: ThemeDecoder.decodeBottomNavigationBarLandscapeLayout(map['landscapeLayout']),
-        mouseCursor: ThemeDecoder.decodeMouseCursor(map['mouseCursor'], validate: true),
+        mouseCursor: ThemeDecoder.decodeMouseCursor(map['mouseCursor'], validate: false),
         onTap: map['onTap'],
         selectedFontSize: JsonClass.parseDouble(map['selectedFontSize'], 13.0)!,
         selectedIconTheme: ThemeDecoder.decodeIconThemeData(map['selectedIconTheme'], validate: false),
@@ -124,6 +118,17 @@ class JsonBottomNavigationBarBuilder extends JsonWidgetBuilder {
     }
   }
 
+  /// [JsonWidgetRegistry].
+  @override
+  void remove(JsonWidgetData data) {
+    if (data.id.isNotEmpty == true) {
+      data.registry.removeValue(data.id);
+    }
+
+    super.remove(data);
+  }
+
+
   @override
   Widget buildCustom({ChildWidgetBuilder? childBuilder,
     required BuildContext context,
@@ -133,30 +138,81 @@ class JsonBottomNavigationBarBuilder extends JsonWidgetBuilder {
       data.children?.isNotEmpty != true,
       '[JsonBottomNavigationBarBuilder] does not support children'
     );
-
-    return BottomNavigationBar(
-        items: items as List<BottomNavigationBarItem>,
-        fixedColor: fixedColor,
-        enableFeedback: enableFeedback,
-        elevation: elevation,
-        key: key,
-        backgroundColor: backgroundColor,
-        type: type,
-        currentIndex: currentIndex,
-        iconSize: iconSize,
-        landscapeLayout: landscapeLayout,
-        mouseCursor: mouseCursor,
-        selectedFontSize: selectedFontSize,
-        selectedIconTheme: selectedIconTheme,
-        selectedItemColor: selectedItemColor,
-        selectedLabelStyle: selectedLabelStyle,
-        showSelectedLabels: showSelectedLabels,
-        showUnselectedLabels: showUnselectedLabels,
-        unselectedFontSize: unselectedFontSize,
-        unselectedIconTheme: unselectedIconTheme,
-        unselectedItemColor: unselectedItemColor,
-        unselectedLabelStyle: unselectedLabelStyle,
-        onTap: onTap,
+    return JsonBottomNavigationBarBuilderWidget(
+      builder: this,
+      childBuilder: childBuilder,
+      data: data,
+      key: key,
     );
   }
 }
+
+class JsonBottomNavigationBarBuilderWidget extends StatefulWidget {
+
+  JsonBottomNavigationBarBuilderWidget({required this.builder, this.childBuilder, required this.data, Key? key}): super(key: key);
+  
+  final JsonBottomNavigationBarBuilder builder;
+  final ChildWidgetBuilder? childBuilder;
+  final JsonWidgetData data;
+
+  @override
+  State<JsonBottomNavigationBarBuilderWidget> createState() => _JsonBottomNavigationBarWidgetState();
+
+  
+}
+
+class _JsonBottomNavigationBarWidgetState extends State<JsonBottomNavigationBarBuilderWidget> {
+  
+  List<BottomNavigationBarItem> _items = [];
+  
+  @override
+  void initState() {
+    super.initState();
+    if(widget.builder.items != null) {
+      var items = <BottomNavigationBarItem>[];
+
+        for (var map in widget.builder.items) {
+          var value = JsonBottomNavigationBarItemBuilder.fromDynamic(map["bottomNavigationBarItem"]["args"]);
+          items.add(BottomNavigationBarItem(
+            icon: value!.icon.build(childBuilder: widget.childBuilder ,context: context) ,
+            backgroundColor: value.backgroundColor,
+            activeIcon: value.activeIcon?.build(childBuilder: widget.childBuilder, context: context),
+            label: value.label,
+            tooltip: value.tooltip
+           ),
+          );
+        }
+        _items = items;
+      }
+    }
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      items: _items,
+      onTap: widget.builder.onTap,
+      unselectedLabelStyle: widget.builder.unselectedLabelStyle,
+      unselectedItemColor: widget.builder.unselectedItemColor,
+      unselectedIconTheme: widget.builder.unselectedIconTheme,
+      unselectedFontSize: widget.builder.unselectedFontSize,
+      showUnselectedLabels: widget.builder.showUnselectedLabels,
+      showSelectedLabels: widget.builder.showSelectedLabels,
+      selectedLabelStyle: widget.builder.selectedLabelStyle,
+      selectedItemColor: widget.builder.selectedItemColor,
+      selectedIconTheme: widget.builder.selectedIconTheme,
+      selectedFontSize: widget.builder.selectedFontSize,
+      mouseCursor: widget.builder.mouseCursor,
+      landscapeLayout: widget.builder.landscapeLayout,
+      iconSize: widget.builder.iconSize,
+      currentIndex: widget.builder.currentIndex,
+      type: widget.builder.type,
+      backgroundColor: widget.builder.backgroundColor,
+      elevation: widget.builder.elevation,
+      enableFeedback: widget.builder.enableFeedback,
+      fixedColor: widget.builder.fixedColor,
+    );
+  }
+
+}
+  
+
+

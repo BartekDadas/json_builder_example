@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:json_theme/json_theme_schemas.dart';
-import 'package:json_dynamic_widget/json_dynamic_widget_schemas.dart';
 import 'package:json_theme/json_theme_schemas.dart';
 import 'bottomNavigationBarItemSchema.dart';
 
@@ -21,7 +18,7 @@ class BottomNavigationBarSchema {
       'enableFeedback' : SchemaHelper.boolSchema,
       'fixedColor' : SchemaHelper.objectSchema(ColorSchema.id),
       'iconSize' : SchemaHelper.numberSchema,
-      'items' : SchemaHelper.arraySchema(BottomNavigationBarItemSchema.id),
+      'items' : SchemaHelper.anySchema,
       'landscapeLayout' : SchemaHelper.objectSchema(BottomNavigationBarLandscapeLayoutSchema.id),
       'mouseCursor' : SchemaHelper.objectSchema(MouseCursorSchema.id),
       'onTap' : SchemaHelper.stringSchema,

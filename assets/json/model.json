@@ -5,30 +5,53 @@
       "title": {
         "type": "text",
         "args": {
-          "text": "AnimatedTheme"
+          "text": "BottomNavigationBarModel"
         }
       }
     }
   },
-  "bottomNavigationBar": {
+  "bottomNavigationBar" : {
     "type": "bottom_navigation_bar",
-    "args": {
-      "items": [
+    "args" : {
+      "items" : [
         {
-          "bottomNavigationBar" : {
-            "label" : "Icon1",
-            "icon": {
-              "type": "icon",
-              "args": {
-                "icon": {
-                  "codePoint": 57704,
-                  "fontFamily": "MaterialIcons"
+          "bottomNavigationBarItem" : {
+            "type": "bottom_navigation_bar_item",
+            "args" : {
+              "label": "Icon1",
+              "icon": {
+                "type": "icon",
+                "args": {
+                  "icon": {
+                    "codePoint": 57604,
+                    "fontFamily": "MaterialIcons"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "bottomNavigationBarItem" : {
+            "type": "bottom_navigation_bar_item",
+            "args" : {
+              "label": "Icon2",
+              "icon": {
+                "type": "icon",
+                "args": {
+                  "icon": {
+                    "codePoint": 57707,
+                    "fontFamily": "MaterialIcons"
+                  }
                 }
               }
             }
           }
         }
-      ]
+      ],
+      "type": "fixed"
     }
   }
 }, "type" : "scaffold"}
+
+

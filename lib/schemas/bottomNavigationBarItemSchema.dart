@@ -10,7 +10,7 @@ class BottomNavigationBarItemSchema {
     r'$comment' : 'https://api.flutter.dev/flutter/widgets/BottomNavigationBarItem-class.html',
     'type' : 'object',
     'title': 'BottomNavigationBarItem',
-    'additionalProperties' : false,
+    'required' : ['icon'],
     'properties' : {
       'activeIcon' : SchemaHelper.objectSchema(JsonWidgetDataSchema.id),
       'backgroundColor' : SchemaHelper.objectSchema(ColorSchema.id),

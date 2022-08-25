@@ -57,16 +57,17 @@ class _MyHomePageState extends State<MyHomePage> {
             schemaId: BottomNavigationBarSchema.id
         )
     );
-    registry.registerCustomBuilder(
-        JsonBottomNavigationBarItemBuilder.type,
-        const JsonWidgetBuilderContainer(
-            builder: JsonBottomNavigationBarItemBuilder.fromDynamic,
-            schemaId: BottomNavigationBarItemSchema.id
-        )
-    );
+    // registry.registerCustomBuilder(
+    //     JsonBottomNavigationBarItemBuilder.type,
+    //     const JsonWidgetBuilderContainer(
+    //         builder: JsonBottomNavigationBarItemBuilder.fromDynamic,
+    //         schemaId: BottomNavigationBarItemSchema.id
+    //     )
+    // );
 
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: FutureBuilder(
             future: readJson().then((value) => mapData = value),
