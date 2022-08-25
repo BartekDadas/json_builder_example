@@ -10,7 +10,11 @@
       }
     }
   },
+<<<<<<< HEAD
   "bottomNavigationBar" : {
+=======
+  "bottomNavigationBarItem": {
+>>>>>>> 394085c42fe6d3bbede7ce31233b73e82dae4d10
     "type": "bottom_navigation_bar",
     "args" : {
       "items" : [
@@ -32,6 +36,7 @@
           }
         },
         {
+<<<<<<< HEAD
           "bottomNavigationBarItem" : {
             "type": "bottom_navigation_bar_item",
             "args" : {
@@ -43,6 +48,30 @@
                     "codePoint": 57707,
                     "fontFamily": "MaterialIcons"
                   }
+=======
+          "bottomNavigationBarItem": {
+            "label": "Icon1",
+            "icon": {
+              "type": "icon",
+              "args": {
+                "icon": {
+                  "codePoint": 57704,
+                  "fontFamily": "MaterialIcons"
+                }
+              }
+            }
+          }
+        },
+        {
+          "bottomNavigationBarItem" : {
+            "label" : "Icon2",
+            "icon": {
+              "type": "icon",
+              "args": {
+                "icon": {
+                  "codePoint": 57704,
+                  "fontFamily": "MaterialIcons"
+>>>>>>> 394085c42fe6d3bbede7ce31233b73e82dae4d10
                 }
               }
             }
@@ -53,5 +82,8 @@
     }
   }
 }, "type" : "scaffold"}
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 394085c42fe6d3bbede7ce31233b73e82dae4d10
